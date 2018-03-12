@@ -77,8 +77,8 @@ alias lslslslslslslslslslslslslslslsls="ls"
 
 # ssh utils
 publish-to-server() {
-  rsync -vuza --exclude=".*" --exclude="node_modules" --delete --delete-excluded ./ server:public_http/$(basename $(pwd))/
-  ssh server find public_http \\\( -type f -exec chmod 664 {} + \\\) -o \\\( -type d -exec chmod 777 {} + \\\)
+    rsync -vuza --exclude=".*" --exclude="node_modules" --delete --delete-excluded ./ server:public_http/$(basename $(pwd))/
+    ssh server find public_http \\\( -type f -exec chmod 664 {} + \\\) -o \\\( -type d -exec chmod 777 {} + \\\)
 }
 upload() {
     scp "$1" server:public_http/
@@ -92,6 +92,9 @@ upload() {
 # TODO: save/restore cursor position instead of wiggle?
 keep_ssh_alive() {
     python -c 'import sys,time;all((sys.stdout.write("\x1b[1C\x1b[1D"),sys.stdout.flush())for _ in iter((lambda:time.sleep(100)),1))' &
+}
+publish-to-s3() {
+    s3cmd sync -P --no-preserve --delete-removed --add-header="Cache-Control: max-age=0, must-revalidate" "$@"
 }
 
 # svn
