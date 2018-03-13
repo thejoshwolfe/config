@@ -15,12 +15,13 @@ HISTFILE=$HOME/.bash_history_large
 # vars
 export EDITOR="vim"
 
-# TODO: hook up util repo
-if [ -z "${MISC_LOCATION}" ]; then
-    # default misc location for
-    MISC_LOCATION="$HOME/dev/misc"
+if [ -z "$UTIL_LOCATION" ]; then
+    # default util location
+    UTIL_LOCATION="$(readlink -f "$(dirname "$(readlink -f "$BASH_SOURCE")")"/../util)"
 fi
-export PATH="$PATH:$MISC_LOCATION"
+if [ -d "$UTIL_LOCATION" ]; then
+    export PATH="$PATH:$UTIL_LOCATION"
+fi
 
 # convenience aliases
 alias prgs="progress"
@@ -36,7 +37,7 @@ alias pse="ps -e | grep"
 alias grepp="grep -RIPs --color=auto"
 alias cpv="prgs cp -rv"
 alias rmv="prgs rm -rfv"
-which gvim &> /dev/null && alias vim="gvim -p" || alias vim="vim -p"
+alias vim="$(which gvim &> /dev/null && echo -n g)vim -p"
 ccd() { mkdir -p "$@" && cd "$@"; }
 cdd() { cd "$(dirname "$@")"; }
 alias torrent-start="screen -m -S torrent transmission-cli -D -U -w ~/torrent/"
@@ -81,9 +82,10 @@ publish-to-server() {
     ssh server find public_http \\\( -type f -exec chmod 664 {} + \\\) -o \\\( -type d -exec chmod 777 {} + \\\)
 }
 upload() {
-    scp "$1" server:public_http/
-    local url=http://wolfesoftware.com/$(python -c 'import sys,urllib; print(urllib.quote(sys.argv[1]))' "$(basename "$1")")
-    [[ "$2" ]] && (echo -n $url | $2) || echo $url
+    # make stdout just the url with no newline so that you can | gtkclip
+    scp "$1" server:public_http/ >&2
+    echo -n "http://wolfesoftware.com/$(python -c 'import sys,urllib; print(urllib.quote(sys.argv[1]))' "$(basename "$1")")"
+    echo >&2
 }
 # when all other attempts fail to keep idle ssh connections open,
 # run this function in the background to periodically wiggle the
@@ -98,12 +100,13 @@ publish-to-s3() {
 }
 
 # svn
-# TODO: check if its even there
-source $MISC_LOCATION/svn-color/svn-color.sh
-svnlog() { svn log "$@" | lesscolor; }
-svndiff() { svn diff --no-diff-deleted "$@" | lesscolor; }
-svnst() { svn st -u --ignore-externals "$@" | lesscolor; }
-svnblame() { svn blame "$@" | lesscolor; }
+if [ -f "$UTIL_LOCATION/svn-color/svn-color.sh" ]; then
+    source $UTIL_LOCATION/svn-color/svn-color.sh
+    svnlog() { svn log "$@" | lesscolor; }
+    svndiff() { svn diff --no-diff-deleted "$@" | lesscolor; }
+    svnst() { svn st -u --ignore-externals "$@" | lesscolor; }
+    svnblame() { svn blame "$@" | lesscolor; }
+fi
 
 # OS-specific
 if [ "$OSTYPE" = "cygwin" ] || [ "$OSTYPE" = "msys" ]; then
