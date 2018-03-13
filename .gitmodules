@@ -1,0 +1,3 @@
+[submodule "vim-bundle/zig.vim"]
+	path = vim-bundle/zig.vim
+	url = https://github.com/zig-lang/zig.vim
