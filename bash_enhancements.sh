@@ -54,6 +54,7 @@ waituntil() { waitforit bash -c "date +%H:%M | grep $1"; }
 wolfebin-from-clipboard() { gtkclip -p | wolfebin put - "$@"; }
 wolfebin-to-clipboard() { wolfebin get -o - "$@" | gtkclip; }
 alias flush_swap="sudo swapoff -a && sudo swapon -a"
+
 # git aliases
 alias gs="git status"
 alias gc="git add -A && git commit -m"
@@ -64,11 +65,18 @@ alias gdcachedwords="gdwords --cached"
 alias gl="git log --graph --stat"
 alias glp="gl -p"
 alias glpwords="glp --color-words --word-diff-regex='\\w+|.'"
-alias gitpull="git pull --recurse-submodules=on-demand"
+gitpull() { git pull && git submodule update --init --recursive; }
 alias gitfetch="git fetch --all --prune --tags"
 alias gitclone="git clone --recursive"
 github() { gitclone git@github.com:$1.git; }
 githome() { gitclone git@home:$1.git; }
+function git-new-branch() {
+    # usage: git-new-branch branchname
+    git push origin $(git commit-tree -m "" $(git mktree <&-) <&-):refs/heads/$1 || return 1
+    git checkout -b $1
+    git push --set-upstream --force-with-lease origin $1
+}
+
 # it's cold in here
 alias burn-cpu="while true; do :; done"
 # common typos
