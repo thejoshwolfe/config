@@ -1,3 +1,6 @@
 [submodule "vim-bundle/zig.vim"]
 	path = vim-bundle/zig.vim
 	url = https://github.com/zig-lang/zig.vim
+[submodule "vim-bundle/typescript-vim"]
+	path = vim-bundle/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim
