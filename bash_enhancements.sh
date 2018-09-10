@@ -65,7 +65,8 @@ alias gdcachedwords="gdwords --cached"
 alias gl="git log --graph --stat"
 alias glp="gl -p"
 alias glpwords="glp --color-words --word-diff-regex='\\w+|.'"
-gitpull() { git pull && git submodule update --init --recursive; }
+gitpull() { git merge '@{upstream}' --ff-only && git submodule sync -q && git submodule update --init --recursive; }
+gitforcepush() { git push $(if [ "$(git rev-parse --verify --abbrev-ref HEAD 2>/dev/null)" != "master" ]; then echo '--force-with-lease'; fi); }
 alias gitfetch="git fetch --all --prune --tags"
 alias gitclone="git clone --recursive"
 github() { gitclone git@github.com:$1.git; }
