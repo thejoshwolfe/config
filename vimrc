@@ -41,8 +41,6 @@ set nrformats-=octal
 
 set bs=2
 
-call pathogen#infect()
-
 
 autocmd BufNewFile,BufRead *.dorp set filetype=dorp
 autocmd BufNewFile,BufRead *.zig set filetype=zig
@@ -78,6 +76,7 @@ let g:syntastic_c_checkers = []
 " hide GVIM toolbar
 if has("gui_running")
   set guioptions -=T
+  colorscheme desert
 endif
 
 let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
