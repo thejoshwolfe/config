@@ -1,17 +1,18 @@
-" basic settings
+" basic features
 syntax on
 filetype on
-set expandtab
-set tabstop=2
-set shiftwidth=2
 set autoindent
 set smartindent
 set smartcase
 set ignorecase
-set bg=dark
 
-" disable "smart" indent for python comments. this types a character 'X', then backspaces, then types #.
-inoremap # X#
+" down with hard tabs
+set expandtab
+" 2 space indent by default?
+set tabstop=2
+set shiftwidth=2
+" my terminal/editor backgrounds are always dark
+set bg=dark
 
 " this is not enough tab
 set tabpagemax=400
@@ -25,23 +26,25 @@ cmap <Nul> <Nop>
 nmap <Nul> <Nop>
 " nice try, Ex mode
 map Q <Nop>
-" who uses semicolon anyway?
+" i've never wanted to use ;
 map ; :
-" F1 is the most helpfulest of all keys
+" disable F1
 map  <F1> <Nop>
 imap <F1> <Nop>
 vmap <F1> <Nop>
 cmap <F1> <Nop>
 nmap <F1> <Nop>
-" reorder tabs
+" reorder tabs with Ctrl+PageUp and Ctrl+PageDown
 map <C-S-PageUp> :tabm -1<CR>
 map <C-S-PageDown> :tabm +1<CR>
-" go home, octal. you're drunk
+
+" Ctrl+A, Ctrl+X should not interpret numbers in C-style octal
 set nrformats-=octal
 
+" this is required in some strange terminal+ssh situations to make backspace and delete work properly
 set bs=2
 
-
+" manual ftdetect for some languages
 autocmd BufNewFile,BufRead *.dorp set filetype=dorp
 autocmd BufNewFile,BufRead *.zig set filetype=zig
 autocmd BufNewFile,BufRead *.ll set filetype=llvm
@@ -62,21 +65,19 @@ autocmd FileType zig setlocal shiftwidth=4
 autocmd FileType python setlocal tabstop=4
 autocmd FileType python setlocal shiftwidth=4
 
+" swap files are more trouble than they're worth
 set noswapfile
 
+" xml files often have free text in english.
 autocmd FileType xml setlocal spell
 autocmd FileType xml syntax spell toplevel
-let &spellfile=$HOME . "/.vim/spellbook." . &encoding . ".add"
-let g:syntastic_java_checkers = []
-let g:syntastic_docbk_checkers = []
-let g:syntastic_xml_checkers = []
-let g:syntastic_cpp_checkers = []
-let g:syntastic_c_checkers = []
 
-" hide GVIM toolbar
+" enable adding words to a dictionary with zg
+let &spellfile=$HOME . "/.vim/spellbook." . &encoding . ".add"
+
 if has("gui_running")
+  " hide GVIM toolbar
   set guioptions -=T
+  " this is the color scheme i like
   colorscheme desert
 endif
-
-let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
