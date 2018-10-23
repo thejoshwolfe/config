@@ -112,9 +112,14 @@ gitsubmodulesplease() {
     git submodule update --recursive --init &&
     # blow away any local deviations from head:
     # 1. delete untracked files and directories.
-    git submodule foreach -q --recursive git clean -q -fd &&
+    git submodule foreach -q --recursive 'git clean -q -fd' &&
     # 2. revert local modifications to tracked files
-    git submodule foreach -q --recursive git reset -q --hard HEAD
+    git submodule foreach -q --recursive 'git reset -q --hard HEAD'
+    # The 'quotes' around the subcommands aren't necessary, except that
+    # there appears to be a bug in `git submodule foreach` where any -q
+    # given to the subcommand is gobbled up by the main git command and not passed on,
+    # and the quotes work around that problem.
+    # All software is terrible.
 }
 
 gitpull() {
