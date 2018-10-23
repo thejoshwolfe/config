@@ -39,6 +39,10 @@ fi
 if which-q xdg-open; then
     alias x="xdg-open"
 fi
+if which-q steam; then
+    # because Factorio will violently crash the display driver if you try to quit the game cleanly
+    alias kill-steam-game='kill -9 $(ps -ef | grep -P "[g]ameoverlayui" | findall " -pid (\d+)")'
+fi
 
 # --content-disposition respects the file name headers instead of using the url path
 alias wget="wget --content-disposition"
