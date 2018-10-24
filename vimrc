@@ -17,6 +17,10 @@ set bg=dark
 " this is not enough tab
 set tabpagemax=400
 
+" disable "smart" indent for python comments. this types a character 'X', then backspaces, then types #.
+" this is really stupid.
+inoremap # X#
+
 " Ctrl+Space should probably be autocomplete instead of whaveter the hell it does normally
 map  <Nul> <Nop>
 imap <Nul> <C-N>
