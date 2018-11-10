@@ -39,6 +39,11 @@ fi
 if which-q xdg-open; then
     alias x="xdg-open"
 fi
+if which-q explorer.exe && which-q cygpath; then
+    x() {
+        explorer.exe "$(cygpath -wa "$1")"
+    }
+fi
 if which-q steam; then
     # because Factorio will violently crash the display driver if you try to quit the game cleanly
     alias kill-steam-game='kill -9 $(ps -ef | grep -P "[g]ameoverlayui" | findall " -pid (\d+)")'
