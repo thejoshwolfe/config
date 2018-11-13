@@ -22,7 +22,11 @@ export EDITOR="vim"
 # make standard command line programs more tolerable to work with
 
 # why doesn't which have a -q option like diff?
-alias which-q="which &> /dev/null"
+which-q() {
+    # this has to be a function, not an alias,
+    # or else the below usage won't work for some types of shell invocations
+    which &> /dev/null "$@"
+}
 alias dush="du -sh"
 alias real-df="df -hT -x tmpfs -x debugfs -x devtmpfs -x ecryptfs"
 alias ls="ls --color=auto"
