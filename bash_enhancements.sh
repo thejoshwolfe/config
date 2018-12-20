@@ -99,6 +99,7 @@ background() {
 
 # git
 alias gs="git status"
+alias sg="git status"
 alias gd="git diff"
 alias gdcached="gd --cached"
 alias gdwords="gd --color-words --word-diff-regex='\\w+|.'"
