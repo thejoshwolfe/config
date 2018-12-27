@@ -108,7 +108,7 @@ alias gl="git log --graph --stat"
 alias glp="gl -p"
 alias glpwords="glp --color-words --word-diff-regex='\\w+|.'"
 alias gc="git add -A && git commit -m"
-alias gitfetch="git fetch --all --prune --tags"
+alias gitfetch="git fetch --prune --tags"
 alias gitclone="git clone --recursive"
 
 gitsubmodulesplease() {
@@ -212,15 +212,6 @@ publish-to-server() {
     # what i use to publish projects to http://wolfesoftware.com/
     rsync -vuza --exclude=".*" --exclude="node_modules" --delete --delete-excluded ./ server:public_http/$(basename $(pwd))/
     ssh server find public_http \\\( -type f -exec chmod 664 {} + \\\) -o \\\( -type d -exec chmod 777 {} + \\\)
-}
-upload() {
-    # TODO: this function kinda sucks. proceed at your own risk.
-
-    # make stdout just the url with no newline so that you can | gtkclip
-    scp "$1" server:public_http/ >&2
-    echo -n "http://wolfesoftware.com/$(python -c 'import sys,urllib; print(urllib.quote(sys.argv[1]))' "$(basename "$1")")"
-    # but we can't leave no newline on the terminal, so echo a newline to stderr to fix the cursor.
-    echo >&2
 }
 
 # when all other attempts fail to keep idle ssh connections open,
