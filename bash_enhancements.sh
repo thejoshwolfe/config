@@ -71,7 +71,7 @@ alias what-ubuntu-am-i="lsb_release -a"
 cd-real() {
     path="$(readlink -f "$1")"
     # error handling in bash is so hard.
-    if [ "$?" != 1 ]; then return 1; fi
+    if [ "$?" != 0 ]; then return 1; fi
     cd "$path"
 }
 alias gdb="gdb -quiet"
