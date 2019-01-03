@@ -8,9 +8,9 @@ set ignorecase
 
 " down with hard tabs
 set expandtab
-" 2 space indent by default?
-set tabstop=2
-set shiftwidth=2
+" 4 space indent by default
+set tabstop=4
+set shiftwidth=4
 " my terminal/editor backgrounds are always dark
 set bg=dark
 
@@ -59,15 +59,13 @@ autocmd BufNewFile,BufRead *.as set filetype=actionscript
 autocmd FileType go setlocal noexpandtab
 autocmd FileType make setlocal noexpandtab
 
-" indent 2, except for these languages, which indent 4
-autocmd FileType c setlocal tabstop=4
-autocmd FileType c setlocal shiftwidth=4
-autocmd FileType cpp setlocal tabstop=4
-autocmd FileType cpp setlocal shiftwidth=4
-autocmd FileType zig setlocal tabstop=4
-autocmd FileType zig setlocal shiftwidth=4
-autocmd FileType python setlocal tabstop=4
-autocmd FileType python setlocal shiftwidth=4
+" indent 4, except for these languages, which indent 2
+autocmd FileType html setlocal tabstop=2
+autocmd FileType html setlocal shiftwidth=2
+autocmd FileType css setlocal tabstop=2
+autocmd FileType css setlocal shiftwidth=2
+autocmd FileType javascript setlocal tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2
 
 " swap files are more trouble than they're worth
 set noswapfile
