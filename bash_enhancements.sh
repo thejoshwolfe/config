@@ -28,7 +28,7 @@ which-q() {
     which &> /dev/null "$@"
 }
 alias dush="du -sh"
-alias real-df="df -hT -x tmpfs -x debugfs -x devtmpfs -x ecryptfs"
+alias real-df="df -hT -x tmpfs -x debugfs -x devtmpfs -x ecryptfs -x squashfs"
 alias ls="ls --color=auto"
 alias lsa="ls -A"
 alias flush_swap="sudo swapoff -a && sudo swapon -a"
@@ -110,6 +110,7 @@ alias glpwords="glp --color-words --word-diff-regex='\\w+|.'"
 alias gc="git add -A && git commit -m"
 alias gitfetch="git fetch --prune --tags"
 alias gitclone="git clone --recursive"
+alias gitrevparse="git rev-parse --verify"
 
 gitsubmodulesplease() {
     # make submodules be what they should be.
