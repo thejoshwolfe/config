@@ -123,7 +123,7 @@ gitsubmodulesplease() {
     git submodule update --recursive --init &&
     # blow away any local deviations from head:
     # 1. delete untracked files and directories.
-    git submodule foreach -q --recursive 'git clean -q -fd' &&
+    git submodule foreach -q --recursive 'git clean -q -ffd' &&
     # 2. revert local modifications to tracked files
     git submodule foreach -q --recursive 'git reset -q --hard HEAD'
     # The 'quotes' around the subcommands aren't necessary, except that
