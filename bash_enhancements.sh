@@ -229,8 +229,8 @@ publish-to-s3() {
 }
 
 # svn, because git is not the right tool for every job.
-if [ -f "$UTIL_LOCATION/svn-color/svn-color.sh" ]; then
-    source $UTIL_LOCATION/svn-color/svn-color.sh
+if [ -f "$UTIL_LOCATION/deps/svn-color/svn-color.sh" ]; then
+    source $UTIL_LOCATION/deps/svn-color/svn-color.sh
     svnlog() { svn log "$@" | lesscolor; }
     svndiff() { svn diff --no-diff-deleted "$@" | lesscolor; }
     svnst() { svn st -u --ignore-externals "$@" | lesscolor; }
