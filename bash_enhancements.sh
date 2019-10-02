@@ -57,7 +57,8 @@ fi
 alias wget="wget --content-disposition"
 # warn when mv would clobber a file
 alias mv="mv -i"
-alias grepp="grep -RIPs --color=auto"
+alias grep="grep -RI --color=auto"
+grepp() { `which grep` -RIPs --color=always "$@" | lesscolor; }
 # always pass vim -p to use tabs instead of the weird sequential edit thing vim does by default.
 if which-q gvim; then
     # prefer gvim if it's installed
