@@ -59,6 +59,7 @@ alias wget="wget --content-disposition"
 alias mv="mv -i"
 alias grep="grep -RI --color=auto"
 grepp() { `which grep` -RIPs --color=always "$@" | lesscolor; }
+grepb() { grepp "\b$(echo -n $(gtkclip -p))\b" "$@"; }
 # always pass vim -p to use tabs instead of the weird sequential edit thing vim does by default.
 if which-q gvim; then
     # prefer gvim if it's installed
