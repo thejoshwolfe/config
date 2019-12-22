@@ -57,7 +57,7 @@ fi
 alias wget="wget --content-disposition"
 # warn when mv would clobber a file
 alias mv="mv -i"
-alias grep="grep -RI --color=auto"
+alias grep="grep -I --color=auto"
 grepp() { `which grep` -RIPs --color=always "$@" | lesscolor; }
 grepb() { grepp "\b$(echo -n $(gtkclip -p))\b" "$@"; }
 # always pass vim -p to use tabs instead of the weird sequential edit thing vim does by default.
