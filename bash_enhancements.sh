@@ -205,17 +205,6 @@ github() {
     # for example `gitclone thejoshwolfe/util`
     gitclone git@github.com:$1.git;
 }
-githome() {
-    # if you run a git server from your ssh host named "home"
-    gitclone git@home:$1.git;
-}
-
-# ssh utils
-publish-to-server() {
-    # what i use to publish projects to http://wolfesoftware.com/
-    rsync -vuza --exclude=".*" --exclude="node_modules" --delete --delete-excluded ./ server:public_http/$(basename $(pwd))/
-    ssh server find public_http \\\( -type f -exec chmod 664 {} + \\\) -o \\\( -type d -exec chmod 777 {} + \\\)
-}
 
 # when all other attempts fail to keep idle ssh connections open,
 # run this function in the background to periodically wiggle the
