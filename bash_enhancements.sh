@@ -216,7 +216,11 @@ keep_ssh_alive() {
 }
 
 publish-to-s3() {
-    s3cmd sync -P --no-preserve --delete-removed --add-header="Cache-Control: max-age=0, must-revalidate" "$@"
+    s3cmd sync -P --no-preserve --add-header="Cache-Control: max-age=0, must-revalidate" "$@"
+}
+
+publish-to-s3-delete-removed() {
+    publish-to-s3 --delete-removed "$@"
 }
 
 # svn, because git is not the right tool for every job.
