@@ -95,6 +95,15 @@ if [ -d "$UTIL_LOCATION" ]; then
     alias un="prgs unfoo -v"
 fi
 
+# see https://github.com/thejoshwolfe/whitespace_lint
+if [ -z "$WHITESPACE_LINE_LOCATION" ]; then
+    # guess that it's sitting next to this repo
+    WHITESPACE_LINE_LOCATION="$(readlink -f "$(dirname "$(readlink -f "$BASH_SOURCE")")"/../whitespace_lint)"
+fi
+if [ -d "$WHITESPACE_LINE_LOCATION" ]; then
+    export PATH="$PATH:$WHITESPACE_LINE_LOCATION"
+fi
+
 background() {
     "$@" &> /dev/null &
 }
