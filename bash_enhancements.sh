@@ -171,11 +171,9 @@ gitforcepush() {
 
     if [ "$REMOTE/$(git rev-parse --verify --abbrev-ref HEAD 2>/dev/null)" == "$(git rev-parse --verify --abbrev-ref "$REMOTE/HEAD" 2>/dev/null)" ]; then
         # main branch
-        echo main
         git push "$REMOTE"
     else
         # non-main branch or not a git repo
-        echo non-main
         git push --force-with-lease "$REMOTE"
     fi
 }
