@@ -161,18 +161,22 @@ gitpull() {
 
 gitforcepush() {
     # this is usually what i want instead of `git push`.
-    # if you're on master, this is just a `git push`.
-    # if you're on a non-master branch, it is assumed that rebasing is common
+    # if you're on main (or whatever the primary branch is, e.g. "master"), this is just a `git push`.
+    # if you're on a non-main branch, it is assumed that rebasing is common
     # (including amending, squashing, etc.), so you often need to force push.
     # uses --force-with-lease is better than --force,
     # but what i really want is --force-if-the-commits-im-blowing-away-are-also-by-me.
 
-    if [ "$(git rev-parse --verify --abbrev-ref HEAD 2>/dev/null)" == "master" ]; then
-        # master branch
-        git push
+    REMOTE=${1-origin}
+
+    if [ "$REMOTE/$(git rev-parse --verify --abbrev-ref HEAD 2>/dev/null)" == "$(git rev-parse --verify --abbrev-ref "$REMOTE/HEAD" 2>/dev/null)" ]; then
+        # main branch
+        echo main
+        git push "$REMOTE"
     else
-        # non-master branch or not a git repo
-        git push --force-with-lease
+        # non-main branch or not a git repo
+        echo non-main
+        git push --force-with-lease "$REMOTE"
     fi
 }
 
