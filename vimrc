@@ -6,6 +6,11 @@ set smartindent
 set smartcase
 set ignorecase
 
+" how long to freeze the UI when something "important" needs to be said
+set timeoutlen=200
+" don't screw up ESC followed by Shift+O if you're typing fast.
+set ttimeoutlen=0
+
 " down with hard tabs
 set expandtab
 " 4 space indent by default
