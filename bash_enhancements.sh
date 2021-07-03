@@ -242,3 +242,6 @@ if [ -f "$UTIL_LOCATION/deps/svn-color/svn-color.sh" ]; then
     svnst() { svn st -u --ignore-externals "$@" | lesscolor; }
     svnblame() { svn blame "$@" | lesscolor; }
 fi
+if [ -f "$UTIL_LOCATION/../pvc/some_aliases.bash" ]; then
+    source "$UTIL_LOCATION/../pvc/some_aliases.bash"
+fi
