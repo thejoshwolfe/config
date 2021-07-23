@@ -58,7 +58,7 @@ alias wget="wget --content-disposition"
 # warn when mv would clobber a file
 alias mv="mv -i"
 alias grep="grep -I --color=auto"
-grepp() { `which grep` -RIPs --color=always "$@" | lesscolor; }
+grepp() { `which grep` -rIPs --color=always "$@" | lesscolor; }
 grepb() { grepp "\b$(echo -n $(gtkclip -p))\b" "$@"; }
 # always pass vim -p to use tabs instead of the weird sequential edit thing vim does by default.
 if which-q gvim; then
@@ -127,6 +127,11 @@ gitsubmodulesplease() {
     # make submodules be what they should be.
     # anything ignored by .gitignore is also ignored by this function.
     # after this function, `git status` should say nothing about submodules.
+
+    # first blow away any local changes.
+    # this can break `submodule update` if we don't do it first.
+    git submodule foreach -q --recursive 'git clean -q -ffd' &&
+    git submodule foreach -q --recursive 'git reset -q --hard HEAD' &&
 
     # this is necessary when a submodule's remote url is changed
     git submodule sync -q --recursive &&
