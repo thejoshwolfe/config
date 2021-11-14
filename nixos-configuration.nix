@@ -77,6 +77,7 @@
     vim
     python3
     git
+    file
     networkmanagerapplet
   ];
 
