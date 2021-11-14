@@ -251,3 +251,28 @@ publish-to-s3() {
 publish-to-s3-delete-removed() {
     publish-to-s3 --delete-removed "$@"
 }
+
+
+# Nixos Stuff
+
+save-nixos-config() {
+    here="$(dirname "$(readlink -f "$BASH_SOURCE")")"
+    # Copy in the configuration from the system.
+    cp /etc/nixos/configuration.nix "$here"/nixos-configuration.nix &&
+    # Stage the changes.
+    git -C "$here" add nixos-configuration.nix &&
+    # if there's nothing to commit, then we're done.
+    { git -C "$here" diff --cached --quiet && return || true; } &&
+    # Show the fleshbag human at the keyboard what they're committing.
+    (git -C "$here" diff --cached --color=always | less -RX) &&
+    # Enter a commit message through $EDITOR.
+    # (Entering an empty message will exit 1 at this point.)
+    git -C "$here" commit &&
+    # Push
+    git -C "$here" push
+}
+
+edit-nixos-config() {
+    sudo sh -c 'vim /etc/nixos/configuration.nix && nixos-rebuild switch' &&
+    save-nixos-config
+}
