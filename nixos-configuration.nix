@@ -74,13 +74,19 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # core things that bootstrap everything else
     vim
+    networkmanagerapplet
+
+    # utilities
     python3
     git
     file
-    networkmanagerapplet
   ];
 
+  nixpkgs.config.allowUnfree = true;
+
+  programs.steam.enable = true;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
