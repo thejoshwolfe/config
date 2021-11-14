@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 here="$(dirname $(readlink -f $0))"
 

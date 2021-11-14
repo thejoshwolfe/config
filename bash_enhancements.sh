@@ -1,6 +1,6 @@
 # bash things that are common on every computer i run bash on
 
-# bad defaults
+# Bash stuff
 HISTCONTROL=ignoreboth
 # "unlimited" history
 HISTFILESIZE=1000000000
@@ -16,10 +16,11 @@ PROMPT_COMMAND='history -a'
 # it will clobber the unused default file.
 HISTFILE=$HOME/.bash_history_large
 
+
+# Linux/Cygwin stuff
+
 # used by `git commit` without a -m argument
 export EDITOR="vim"
-
-# make standard command line programs more tolerable to work with
 
 # why doesn't which have a -q option like diff?
 which-q() {
@@ -70,18 +71,13 @@ fi
 ccd() { mkdir -p "$1" && cd "$1"; }
 alias torrent-start="screen -m -S torrent transmission-cli -D -U -w ~/torrent/"
 alias what-ubuntu-am-i="lsb_release -a"
-cd-real() {
-    path="$(readlink -f "$1")"
-    # error handling in bash is so hard.
-    if [ "$?" != 0 ]; then return 1; fi
-    cd "$path"
-}
+alias cd-real="cd -P"
 alias gdb="gdb -quiet"
 # common typos
 alias dc="cd"
 alias sl="ls"
 alias lslslslslslslslslslslslslslslsls="ls"
-# it's cold in here
+# Fun fact: every home appliance is a 100% efficient electric space heater.
 alias burn-cpu="while true; do :; done"
 
 # see https://github.com/thejoshwolfe/util
@@ -108,7 +104,18 @@ background() {
     "$@" &> /dev/null &
 }
 
-# git
+# when all other attempts fail to keep idle ssh connections open,
+# run this function in the background to periodically wiggle the
+# cursor. This will corrupt your terminal experience only when the
+# cursor is in the rightmost column of the terminal.
+# TODO: save/restore cursor position instead of wiggle?
+keep_ssh_alive() {
+    python -c 'import sys,time;all((sys.stdout.write("\x1b[1C\x1b[1D"),sys.stdout.flush())for _ in iter((lambda:time.sleep(100)),1))' &
+}
+
+
+# Git stuff
+
 alias gs="git status"
 alias sg="git status"
 alias gd="git diff"
@@ -165,11 +172,11 @@ gitpull() {
 }
 
 gitforcepush() {
-    # this is usually what i want instead of `git push`.
-    # if you're on main (or whatever the primary branch is, e.g. "master"), this is just a `git push`.
-    # if you're on a non-main branch, it is assumed that rebasing is common
+    # This is usually what i want instead of `git push`.
+    # If you're on main (or whatever the primary branch is, e.g. "master"), this is just a `git push`.
+    # If you're on a non-main branch, it is assumed that rebasing is common
     # (including amending, squashing, etc.), so you often need to force push.
-    # uses --force-with-lease is better than --force,
+    # Uses --force-with-lease which is better than --force,
     # but what i really want is --force-if-the-commits-im-blowing-away-are-also-by-me.
 
     REMOTE=${1-origin}
@@ -222,23 +229,6 @@ github() {
     gitclone git@github.com:$1.git;
 }
 
-# when all other attempts fail to keep idle ssh connections open,
-# run this function in the background to periodically wiggle the
-# cursor. This will corrupt your terminal experience only when the
-# cursor is in the rightmost column of the terminal.
-# TODO: save/restore cursor position instead of wiggle?
-keep_ssh_alive() {
-    python -c 'import sys,time;all((sys.stdout.write("\x1b[1C\x1b[1D"),sys.stdout.flush())for _ in iter((lambda:time.sleep(100)),1))' &
-}
-
-publish-to-s3() {
-    s3cmd sync -P --no-preserve --add-header="Cache-Control: max-age=0, must-revalidate" "$@"
-}
-
-publish-to-s3-delete-removed() {
-    publish-to-s3 --delete-removed "$@"
-}
-
 # svn, because git is not the right tool for every job.
 if [ -f "$UTIL_LOCATION/deps/svn-color/svn-color.sh" ]; then
     source $UTIL_LOCATION/deps/svn-color/svn-color.sh
@@ -250,3 +240,14 @@ fi
 if [ -f "$UTIL_LOCATION/../pvc/some_aliases.bash" ]; then
     source "$UTIL_LOCATION/../pvc/some_aliases.bash"
 fi
+
+
+# Other stuff
+
+publish-to-s3() {
+    s3cmd sync -P --no-preserve --add-header="Cache-Control: max-age=0, must-revalidate" "$@"
+}
+
+publish-to-s3-delete-removed() {
+    publish-to-s3 --delete-removed "$@"
+}
