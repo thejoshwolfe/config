@@ -78,10 +78,13 @@
     vim
     networkmanagerapplet
 
-    # utilities
+    # programmer things
     python3
     git
     file
+
+    # human-using-a-computer things
+    chromium
   ];
 
   nixpkgs.config.allowUnfree = true;
