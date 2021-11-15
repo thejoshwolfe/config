@@ -252,6 +252,16 @@ publish-to-s3-delete-removed() {
     publish-to-s3 --delete-removed "$@"
 }
 
+alias homegit='GIT_DIR=~/.homegitdir GIT_WORK_TREE=~ git'
+init-homegit() {
+    # This is like a clone but doesn't touch any files outside the git dir.
+    homegit init -b main &&
+    homegit config core.excludesFile ~/.homegitignore &&
+    homegit remote add origin gitea@home:thejoshwolfe/homegit.git &&
+    homegit fetch origin &&
+    homegit reset origin/main &&
+    homegit branch --set-upstream-to=origin/main main
+}
 
 # Nixos Stuff
 
