@@ -75,7 +75,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # core things that bootstrap everything else
-    vim
+    vim_configurable
     networkmanagerapplet
 
     # Xfce
