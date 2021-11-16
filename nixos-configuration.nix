@@ -78,6 +78,10 @@
     vim
     networkmanagerapplet
 
+    # Xfce
+    xfce4-14.xfce4-taskmanager
+    xfce.xfce4-cpugraph-plugin
+
     # programmer things
     python3
     git
