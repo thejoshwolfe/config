@@ -85,6 +85,7 @@
 
     # human-using-a-computer things
     chromium
+    signal-desktop
   ];
 
   nixpkgs.config.allowUnfree = true;
