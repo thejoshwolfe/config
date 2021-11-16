@@ -86,6 +86,7 @@
     python3
     git
     file
+    xclip
 
     # human-using-a-computer things
     chromium
