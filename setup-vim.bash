@@ -5,5 +5,6 @@ here="$(dirname $(readlink -f $0))"
 rm -f ~/.vimrc
 ln -s $here/vimrc ~/.vimrc
 
-rm -rf ~/.vim/bundle
-ln -s $here/vim-bundle ~/.vim/bundle
+mkdir -p ~/.vim/pack/plugins
+rm -f ~/.vim/pack/plugins/start || exit 1
+ln -s $here/vim-bundle ~/.vim/pack/plugins/start
