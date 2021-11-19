@@ -86,11 +86,14 @@
     python3
     git
     file
-    xclip
+    wget
+    unzip
 
     # human-using-a-computer things
     chromium
     signal-desktop
+    xclip
+    vscode
   ];
 
   nixpkgs.config.allowUnfree = true;
