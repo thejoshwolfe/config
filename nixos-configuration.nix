@@ -94,6 +94,7 @@
     signal-desktop
     xclip
     vscode
+    htop
   ];
 
   nixpkgs.config.allowUnfree = true;
