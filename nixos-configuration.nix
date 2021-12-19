@@ -95,6 +95,7 @@
     xclip
     vscode
     htop
+    gimp
   ];
 
   nixpkgs.config.allowUnfree = true;
