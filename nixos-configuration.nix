@@ -15,6 +15,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Enable `perf`.
+  boot.kernel.sysctl = {
+    "kernel.perf_event_paranoid" = -1;
+  };
+
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
@@ -96,6 +101,7 @@
     vscode
     htop
     gimp
+    linuxPackages.perf
   ];
 
   nixpkgs.config.allowUnfree = true;
