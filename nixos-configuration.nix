@@ -93,6 +93,7 @@
     file
     wget
     unzip
+    jq
 
     # human-using-a-computer things
     chromium
