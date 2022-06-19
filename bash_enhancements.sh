@@ -78,7 +78,28 @@ alias dc="cd"
 alias sl="ls"
 alias lslslslslslslslslslslslslslslsls="ls"
 # Fun fact: every home appliance is a 100% efficient electric space heater.
-alias burn-cpu="while true; do :; done"
+burn-cpu() {
+    # The parens are necessary to scope the `trap` handler to a subprocess.
+    (
+        # Default number of cpus is 1.
+        n=${1-1}
+        # Don't get carried away with resource hunger.
+        [ $n -gt 0 ] && [ $n -lt 100 ] || { echo "argument must be in range 1..99: $n" >&2; return 1; }
+        echo "burning $n cpu$([ $n -ne 1 ] && echo s). Use Ctrl+C to stop."
+        # Collect job pids in an array.
+        pids=()
+        # Kill the jobs on Ctrl+C.
+        trap 'kill "${pids[@]}"; echo' SIGINT
+        for ((i=0;i<$n;i++)); do
+            # This is the payload. Execute `true` and `:` bash builtins forever.
+            (while true; do :; done) &
+            # Track the job pid.
+            pids+=($!)
+        done
+        # Main process sleeps rather than joining in the fun.
+        sleep infinity
+    )
+}
 
 # see https://github.com/thejoshwolfe/util
 if [ -z "$UTIL_LOCATION" ]; then
