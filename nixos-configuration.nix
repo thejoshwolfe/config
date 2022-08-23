@@ -101,6 +101,7 @@
     xclip
     vscode
     htop
+    killall
     gimp
     linuxPackages.perf
   ];
