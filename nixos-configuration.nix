@@ -4,6 +4,9 @@
 
 { config, pkgs, ... }:
 
+let
+  unstable = import <nixos-unstable> {};
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -97,7 +100,7 @@
 
     # human-using-a-computer things
     chromium
-    signal-desktop
+    unstable.signal-desktop
     xclip
     vscode
     htop
