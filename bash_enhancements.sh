@@ -266,7 +266,12 @@ fi
 # Other stuff
 
 publish-to-s3() {
-    s3cmd sync -P --no-preserve --add-header="Cache-Control: max-age=0, must-revalidate" "$@"
+    cmd=(s3cmd sync -P --no-preserve --add-header="Cache-Control: max-age=0, must-revalidate")
+    if which-q nix-shell; then
+        nix-run --pure -p s3cmd -p cacert -- "${cmd[@]}" "$@"
+    else
+        "${cmd[@]}" "$@"
+    fi
 }
 
 publish-to-s3-delete-removed() {
