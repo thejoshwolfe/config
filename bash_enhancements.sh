@@ -289,6 +289,8 @@ init-homegit() {
     homegit branch --set-upstream-to=origin/main main
 }
 
+alias zig=~/zig-downloads/active/zig
+
 # Nixos Stuff
 
 save-nixos-config() {
