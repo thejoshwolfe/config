@@ -112,6 +112,11 @@ if [ -d "$UTIL_LOCATION" ]; then
     alias un="prgs unfoo -v"
 fi
 
+# see https://ziglang.org/download/
+if [ -x ~/zig-downloads/active/zig ]; then
+    export PATH=$PATH:~/zig-downloads/active/
+fi
+
 # see https://github.com/thejoshwolfe/whitespace_lint
 if [ -z "$WHITESPACE_LINE_LOCATION" ]; then
     # guess that it's sitting next to this repo
@@ -288,8 +293,6 @@ init-homegit() {
     homegit reset origin/main &&
     homegit branch --set-upstream-to=origin/main main
 }
-
-alias zig=~/zig-downloads/active/zig
 
 # Nixos Stuff
 
