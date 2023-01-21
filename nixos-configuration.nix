@@ -97,6 +97,7 @@ in
     wget
     unzip
     jq
+    gdb
     cgdb
 
     # human-using-a-computer things
