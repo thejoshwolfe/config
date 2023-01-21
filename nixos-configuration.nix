@@ -97,6 +97,7 @@ in
     wget
     unzip
     jq
+    cgdb
 
     # human-using-a-computer things
     chromium
