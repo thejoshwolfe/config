@@ -106,6 +106,7 @@ in
     htop
     killall
     gimp
+    vlc
     linuxPackages.perf
   ];
 
