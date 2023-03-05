@@ -102,7 +102,7 @@ in
 
     # human-using-a-computer things
     chromium
-    unstable.signal-desktop
+    signal-desktop
     xclip
     vscode
     htop
