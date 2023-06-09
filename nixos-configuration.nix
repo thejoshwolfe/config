@@ -99,6 +99,7 @@ in
     jq
     gdb
     cgdb
+    binutils
 
     # human-using-a-computer things
     chromium
