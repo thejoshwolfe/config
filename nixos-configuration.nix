@@ -100,6 +100,8 @@ in
     gdb
     cgdb
     binutils
+    gcc
+    clang
 
     # human-using-a-computer things
     chromium
