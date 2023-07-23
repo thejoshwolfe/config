@@ -317,3 +317,11 @@ edit-nixos-config() {
     sudo sh -c 'vim /etc/nixos/configuration.nix && nixos-rebuild switch' &&
     save-nixos-config
 }
+
+nix-maintenance() {
+    sudo sh -c '
+        nixos-rebuild switch --upgrade &&
+        nix-collect-garbage --delete-old --delete-older-than 30d &&
+        nix-store --optimize
+    '
+}
