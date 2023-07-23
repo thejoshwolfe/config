@@ -323,5 +323,6 @@ nix-maintenance() {
         nixos-rebuild switch --upgrade &&
         nix-collect-garbage --delete-old --delete-older-than 30d &&
         nix-store --optimize
-    '
+    ' &&
+    nixos-os-upgrade check # from https://github.com/thejoshwolfe/util
 }
