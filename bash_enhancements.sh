@@ -112,7 +112,14 @@ if [ -d "$UTIL_LOCATION" ]; then
     alias un="prgs unfoo -v"
 fi
 
-# see https://ziglang.org/download/
+# see https://github.com/thejoshwolfe/zig-download
+if [ -z "$ZIG_DOWNLOAD_LOCATION" ]; then
+    # guess that it's sitting next to this repo
+    ZIG_DOWNLOAD_LOCATION="$(readlink -f "$(dirname "$(readlink -f "$BASH_SOURCE")")"/../zig-download)"
+fi
+if [ -d "$ZIG_DOWNLOAD_LOCATION" ]; then
+    export PATH="$PATH:$ZIG_DOWNLOAD_LOCATION"
+fi
 if [ -x ~/zig-downloads/active/zig ]; then
     export PATH=$PATH:~/zig-downloads/active/
 fi
