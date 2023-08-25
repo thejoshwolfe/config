@@ -63,8 +63,8 @@ autocmd BufNewFile,BufRead *.as set filetype=actionscript
 " some languages use hard tabs
 autocmd FileType go setlocal noexpandtab
 autocmd FileType make setlocal noexpandtab
-autocmd FileType javascript setlocal noexpandtab
-autocmd FileType html setlocal noexpandtab
+"autocmd FileType javascript setlocal noexpandtab
+"autocmd FileType html setlocal noexpandtab
 
 " indent 4, except for these languages, which indent 2
 autocmd FileType html setlocal tabstop=2
