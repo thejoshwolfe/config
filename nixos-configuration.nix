@@ -113,6 +113,7 @@ in
     gimp
     vlc
     linuxPackages.perf
+    gcolor2
   ];
 
   nixpkgs.config.allowUnfree = true;
