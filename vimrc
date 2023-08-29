@@ -16,6 +16,8 @@ set expandtab
 " 4 space indent by default
 set tabstop=4
 set shiftwidth=4
+" Just a single space after '.' please.
+set nojoinspaces
 " my terminal/editor backgrounds are always dark
 set bg=dark
 
