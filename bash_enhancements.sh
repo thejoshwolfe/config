@@ -164,7 +164,7 @@ alias gl="git log --graph --stat"
 alias glp="gl -p"
 alias glpwords="glp --color-words --word-diff-regex='\\w+|.'"
 alias gc="git add -A && git commit -m"
-alias gitfetch="git fetch --prune --tags"
+alias gitfetch="git fetch --prune --tags --prune-tags --atomic"
 alias gitclone="git clone --recursive"
 alias gitrevparse="git rev-parse --verify"
 
