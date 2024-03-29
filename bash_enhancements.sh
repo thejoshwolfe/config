@@ -167,6 +167,13 @@ alias gc="git add -A && git commit -m"
 alias gitfetch="git fetch --prune --tags --prune-tags --atomic"
 alias gitclone="git clone --recursive"
 alias gitrevparse="git rev-parse --verify"
+github() {
+    # for example `gitclone thejoshwolfe/util`
+    gitclone git@github.com:$1.git;
+}
+codeberg() {
+    gitclone git@codeberg.org:$1.git;
+}
 
 gitsubmodulesplease() {
     # make submodules be what they should be.
@@ -260,11 +267,6 @@ git-new-branch() {
     # `--force-with-lease` means the remote branch will only be updated if it's still what we thought it was,
     # which is the empty commit we just pushed.
     git push --set-upstream --force-with-lease origin "$1"
-}
-
-github() {
-    # for example `gitclone thejoshwolfe/util`
-    gitclone git@github.com:$1.git;
 }
 
 # svn, because git is not the right tool for every job.
