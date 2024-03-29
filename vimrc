@@ -75,6 +75,8 @@ autocmd FileType css setlocal tabstop=2
 autocmd FileType css setlocal shiftwidth=2
 autocmd FileType javascript setlocal tabstop=2
 autocmd FileType javascript setlocal shiftwidth=2
+autocmd FileType typescript setlocal tabstop=2
+autocmd FileType typescript setlocal shiftwidth=2
 autocmd FileType proto setlocal tabstop=2
 autocmd FileType proto setlocal shiftwidth=2
 
