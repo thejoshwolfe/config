@@ -119,6 +119,20 @@ in
   nixpkgs.config.allowUnfree = true;
 
   programs.steam.enable = true;
+  nixpkgs.config.packageOverrides = pkgs: {
+    steam = pkgs.steam.override {
+      extraPkgs = pkgs: [
+        pkgs.openssl_1_1
+        pkgs.libnghttp2
+        pkgs.libidn2
+        pkgs.rtmpdump
+        pkgs.libpsl
+      ];
+    };
+  };
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.1.1w"
+  ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
