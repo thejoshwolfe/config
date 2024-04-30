@@ -122,6 +122,7 @@ in
   nixpkgs.config.packageOverrides = pkgs: {
     steam = pkgs.steam.override {
       extraPkgs = pkgs: [
+        # Loop Hero
         pkgs.openssl_1_1
         pkgs.libnghttp2
         pkgs.libidn2
