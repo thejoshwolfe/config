@@ -284,6 +284,14 @@ fi
 
 # Other stuff
 
+dockerps() {
+    # This is 'docker ps' with the following changes:
+    #  * omit the COMMAND and PORTS columns.
+    #  * move the NAMES column to be closer to the front.
+    # Note that '{{.RunningFor}}' is the CREATED column.
+    docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{{.Image}}' "$@"
+}
+
 publish-to-s3() {
     cmd=(s3cmd sync -P --no-preserve --add-header="Cache-Control: max-age=0, must-revalidate")
     if which-q nix-shell; then
