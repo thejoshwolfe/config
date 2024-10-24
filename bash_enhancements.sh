@@ -54,13 +54,6 @@ if which-q steam; then
     kill-steam-game() { kill -9 "$(ps -ef | grep -P "[g]ameoverlayui" | findall " -pid (\d+)")"; }
 fi
 
-# --content-disposition respects the file name headers instead of using the url path
-alias wget="wget --content-disposition"
-# warn when mv would clobber a file
-alias mv="mv -i"
-alias grep="grep -I --color=auto"
-grepp() { `which grep` -rIPs --color=always "$@" | lesscolor; }
-grepb() { grepp "\b$(echo -n $(gtkclip -p))\b" "$@"; }
 # always pass vim -p to use tabs instead of the weird sequential edit thing vim does by default.
 if which-q gvim; then
     # prefer gvim if it's installed
@@ -68,6 +61,15 @@ if which-q gvim; then
 else
     alias vim="vim -p"
 fi
+# --content-disposition respects the file name headers instead of using the url path
+alias wget="wget --content-disposition"
+# warn when mv would clobber a file
+alias mv="mv -i"
+alias grep="grep -I --color=auto"
+grepp() { `which grep` -rIPs --color=always "$@" | lesscolor; }
+grepb() { grepp "\b$(echo -n $(gtkclip -p))\b" "$@"; }
+vim-grepp() { vim $(grepp "$@" -l --color=never); }
+vim-grepb() { vim $(grepb "$@" -l --color=never); }
 ccd() { mkdir -p "$1" && cd "$1"; }
 alias torrent-start="screen -m -S torrent transmission-cli -D -U -w ~/torrent/"
 alias what-ubuntu-am-i="lsb_release -a"
