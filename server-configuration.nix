@@ -124,6 +124,17 @@
         http2 on;
         ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
         ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+
+        location /groovebasin/ {
+          proxy_pass http://127.0.0.1:{{groovebasin-port}}/;
+          # Enable WebSockets
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection $http_connection;
+        }
+        location / {
+          return 301 https://$host:4430/groovebasin/;
+        }
       }
     '';
   };
