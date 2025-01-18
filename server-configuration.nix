@@ -1,7 +1,7 @@
 # This is /etc/nixos/configuration.nix for my server.
 # Replace all placeholders denoted by {{double-curly-braces}} with appropriate values.
-# I used template-mapping from github.com/the{{user}}wolfe/util .
-#   https://github.com/the{{user}}wolfe/util/blob/e0d5ab5f647bebec4f7e2d8b24f5669300f09f13/template-mapping
+# I used template-mapping from github.com/thejoshwolfe/util .
+#   https://github.com/thejoshwolfe/util/blob/e0d5ab5f647bebec4f7e2d8b24f5669300f09f13/template-mapping
 #   template-mapping -t ~/dev/config/server-configuration.nix -l /etc/nixos/configuration.nix -j /etc/nixos/configuration.nix.values.json -i -r && sudo nixos-rebuild switch
 
 { config, pkgs, ... }:
