@@ -86,7 +86,7 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "0 3 * * * {{user}} /home/{{user}}/software/backup.sh"
+      "0 3 * * * josh /home/josh/software/backup.sh"
     ];
   };
 
@@ -178,7 +178,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
-    {{user}} = {
+    josh = {
       isNormalUser = true;
       uid = 1000;
       extraGroups = [
