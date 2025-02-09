@@ -95,6 +95,7 @@ in
     git
     file
     wget
+    zip
     unzip
     jq
     gdb
