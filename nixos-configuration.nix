@@ -106,6 +106,7 @@ in
 
     # human-using-a-computer things
     chromium
+    firefox
     signal-desktop
     xclip
     vscode
