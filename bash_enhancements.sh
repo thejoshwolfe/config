@@ -17,8 +17,6 @@ PROMPT_COMMAND='history -a'
 HISTFILE=$HOME/.bash_history_large
 
 
-# Linux/Cygwin stuff
-
 # used by `git commit` without a -m argument
 export EDITOR="vim"
 
@@ -43,10 +41,20 @@ if which-q fromdos; then
 fi
 if which-q xdg-open; then
     alias x="xdg-open"
-fi
-if which-q explorer.exe && which-q cygpath; then
+elif which-q explorer.exe; then
     x() {
-        explorer.exe "$(cygpath -wa "$1")"
+        # Not sure how to convert from a wsl path to a Windows path elegantly,
+        # so let's cd into the parent of the argument, then give the basename to explorer.exe.
+        arg=${1-.}
+        dir=$(dirname "$arg")
+        name=$(basename "$arg")
+        if [ "$name" = / ]; then
+            # This happens with `x /`. If explorer.exe sees "/", it will fail to interpret it, so give "." instead.
+            # Note that `x /..` will become `(cd / && explorer.exe ..)` which will take you to \\wsl.localhost,
+            # the parent of \\wsl.localhost\Ubuntu aka "/", which breaks the typical convention of "/.." being the same as "/".
+            name=.
+        fi
+        (cd "$dir" && explorer.exe "$name")
     }
 fi
 if which-q steam; then
