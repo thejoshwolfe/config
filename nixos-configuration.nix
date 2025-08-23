@@ -117,6 +117,7 @@ in
     linuxPackages.perf
     gcolor3
     evince
+    libreoffice
   ];
 
   nixpkgs.config.allowUnfree = true;
