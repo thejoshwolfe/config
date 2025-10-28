@@ -154,6 +154,19 @@
           return 301 https://$host:4430/groovebasin/;
         }
       }
+
+      # rchalloween2025
+      server {
+        listen 0.0.0.0:3000 ssl ;
+        server_name {{web-domain}} ;
+        http2 on;
+        ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
+        ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+
+        location / {
+          proxy_pass http://127.0.0.1:3001/;
+        }
+      }
     '';
   };
   services.miniflux = {
