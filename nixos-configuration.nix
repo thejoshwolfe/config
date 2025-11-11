@@ -103,6 +103,7 @@ in
     binutils
     gcc
     clang
+    colordiff
 
     # human-using-a-computer things
     chromium
