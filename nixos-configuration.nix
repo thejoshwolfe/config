@@ -124,6 +124,7 @@ in
   nixpkgs.config.allowUnfree = true;
 
   programs.steam.enable = true;
+  programs.nix-ld.enable = true;
   nixpkgs.config.packageOverrides = pkgs: {
     steam = pkgs.steam.override {
       extraPkgs = pkgs: [
