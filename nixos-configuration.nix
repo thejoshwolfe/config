@@ -83,7 +83,7 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # core things that bootstrap everything else
-    vim_configurable
+    vim-full
     networkmanagerapplet
 
     # Xfce
