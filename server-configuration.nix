@@ -118,20 +118,24 @@
     # with custom port numbers without just appending verbatim config.
     # I generally found the "convenient" nixos config options lacking as of early 2025.
     appendHttpConfig = ''
-      server {
-        # If anyone comes here unencrypted, redirect them immediately.
-        listen 0.0.0.0:8000 ;
-        server_name {{web-domain}} ;
-        location / {
-          return 301 https://$host:4430$request_uri;
-        }
-      }
+      #server {
+      #  # If anyone comes here unencrypted, redirect them immediately.
+      #  listen 0.0.0.0:8000 ;
+      #  server_name {{web-domain}} ;
+      #  location / {
+      #    return 301 https://$host:4430$request_uri;
+      #  }
+      #}
+
+      # main web
       server {
         listen 0.0.0.0:4430 ssl ;
         server_name {{web-domain}} ;
         http2 on;
         ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
         ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+        # Accept uploads larger than 1MB.
+        client_max_body_size 0;
 
         location /groovebasin/ {
           proxy_pass http://127.0.0.1:{{groovebasin-port}}/;
@@ -149,22 +153,161 @@
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Proto $scheme;
         }
-        location = / {
-          # The default is groovebasin
-          return 301 https://$host:4430/groovebasin/;
-        }
+        #location = / {
+        #  # The default is groovebasin
+        #  return 301 https://$host:4430/groovebasin/;
+        #}
       }
 
-      # rchalloween2025
+      # SSL for archipelago servers
       server {
-        listen 0.0.0.0:3000 ssl ;
+        listen 0.0.0.0:38181 ssl ;
         server_name {{web-domain}} ;
         http2 on;
         ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
         ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
 
         location / {
-          proxy_pass http://127.0.0.1:3001/;
+          proxy_pass http://127.0.0.1:38281/;
+          # Enable WebSockets
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection $http_connection;
+        }
+      }
+      server {
+        listen 0.0.0.0:38182 ssl ;
+        server_name {{web-domain}} ;
+        http2 on;
+        ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
+        ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+
+        location / {
+          proxy_pass http://127.0.0.1:38282/;
+          # Enable WebSockets
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection $http_connection;
+        }
+      }
+      server {
+        listen 0.0.0.0:38183 ssl ;
+        server_name {{web-domain}} ;
+        http2 on;
+        ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
+        ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+
+        location / {
+          proxy_pass http://127.0.0.1:38283/;
+          # Enable WebSockets
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection $http_connection;
+        }
+      }
+      server {
+        listen 0.0.0.0:38184 ssl ;
+        server_name {{web-domain}} ;
+        http2 on;
+        ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
+        ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+
+        location / {
+          proxy_pass http://127.0.0.1:38284/;
+          # Enable WebSockets
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection $http_connection;
+        }
+      }
+      server {
+        listen 0.0.0.0:38185 ssl ;
+        server_name {{web-domain}} ;
+        http2 on;
+        ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
+        ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+
+        location / {
+          proxy_pass http://127.0.0.1:38285/;
+          # Enable WebSockets
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection $http_connection;
+        }
+      }
+      server {
+        listen 0.0.0.0:38186 ssl ;
+        server_name {{web-domain}} ;
+        http2 on;
+        ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
+        ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+
+        location / {
+          proxy_pass http://127.0.0.1:38286/;
+          # Enable WebSockets
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection $http_connection;
+        }
+      }
+      server {
+        listen 0.0.0.0:38187 ssl ;
+        server_name {{web-domain}} ;
+        http2 on;
+        ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
+        ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+
+        location / {
+          proxy_pass http://127.0.0.1:38287/;
+          # Enable WebSockets
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection $http_connection;
+        }
+      }
+      server {
+        listen 0.0.0.0:38188 ssl ;
+        server_name {{web-domain}} ;
+        http2 on;
+        ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
+        ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+
+        location / {
+          proxy_pass http://127.0.0.1:38288/;
+          # Enable WebSockets
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection $http_connection;
+        }
+      }
+      server {
+        listen 0.0.0.0:38189 ssl ;
+        server_name {{web-domain}} ;
+        http2 on;
+        ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
+        ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+
+        location / {
+          proxy_pass http://127.0.0.1:38289/;
+          # Enable WebSockets
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection $http_connection;
+        }
+      }
+
+      # cheese tracker
+      server {
+        listen 0.0.0.0:4431 ssl ;
+        server_name {{web-domain}} ;
+        http2 on;
+        ssl_certificate /etc/nginx/certs/{{web-domain}}/cert.pem;
+        ssl_certificate_key /etc/nginx/certs/{{web-domain}}/key.pem;
+
+        location / {
+          proxy_pass http://127.0.0.1:1229/;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
         }
       }
     '';
@@ -206,6 +349,8 @@
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
+
+  programs.nix-ld.enable = true;
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;
