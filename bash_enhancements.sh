@@ -179,10 +179,10 @@ alias gitclone="git clone --recursive"
 alias gitrevparse="git rev-parse --verify"
 github() {
     # for example `gitclone thejoshwolfe/util`
-    gitclone git@github.com:$1.git;
+    gitclone "git@github.com:$1.git" && cd "$(basename "$1")"
 }
 codeberg() {
-    gitclone git@codeberg.org:$1.git;
+    gitclone "git@codeberg.org:$1.git" && cd "$(basename "$1")"
 }
 
 gitsubmodulesplease() {

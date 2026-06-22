@@ -79,6 +79,8 @@ autocmd FileType typescript setlocal tabstop=2
 autocmd FileType typescript setlocal shiftwidth=2
 autocmd FileType proto setlocal tabstop=2
 autocmd FileType proto setlocal shiftwidth=2
+autocmd FileType json setlocal tabstop=2
+autocmd FileType json setlocal shiftwidth=2
 
 " swap files are more trouble than they're worth
 set noswapfile
