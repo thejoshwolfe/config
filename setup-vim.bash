@@ -2,9 +2,21 @@
 
 here="$(dirname $(readlink -f $0))"
 
-rm -f ~/.vimrc
-ln -s $here/vimrc ~/.vimrc
+which-q() {
+    which &> /dev/null "$@"
+}
 
-mkdir -p ~/.vim/pack/plugins
-rm -f ~/.vim/pack/plugins/start || exit 1
-ln -s $here/vim-bundle ~/.vim/pack/plugins/start
+# classic vim
+if which-q vim; then
+    ln -sf $here/vimrc ~/.vimrc
+
+    mkdir -p ~/.vim/pack/plugins
+    rm -f ~/.vim/pack/plugins/start || exit 1
+    ln -s $here/vim-bundle ~/.vim/pack/plugins/start
+fi
+
+# neovim
+if which-q nvim; then
+    mkdir -p ~/.config/nvim
+    ln -sf $here/nvim.lua ~/.config/nvim/init.lua
+fi

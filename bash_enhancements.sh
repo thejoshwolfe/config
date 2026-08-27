@@ -66,6 +66,11 @@ fi
 if which-q gvim; then
     # prefer gvim if it's installed
     alias vim="gvim -p"
+elif which-q nvim; then
+    function vim() {
+        background ghostty --command="$(shlex_join nvim -p "$@")"
+    }
+    export EDITOR=nvim
 else
     alias vim="vim -p"
 fi
@@ -149,7 +154,7 @@ if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
 fi
 
 background() {
-    "$@" &> /dev/null &
+    ("$@" &> /dev/null &)
 }
 
 # when all other attempts fail to keep idle ssh connections open,
@@ -358,3 +363,6 @@ nix-maintenance() {
     ' &&
     nixos-os-upgrade check # from https://github.com/thejoshwolfe/util
 }
+
+alias pacman="sudo pacman"
+alias systemctl="sudo systemctl"
