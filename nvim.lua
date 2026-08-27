@@ -23,6 +23,7 @@ vim.keymap.set("n", ";", ":") -- I've never wanted to use ;.
 vim.keymap.set({"n", "i", "v", "c"}, "<F1>", "") -- Hitting F1 is always an accident.
 
 vim.keymap.set("n", "Y", "yy") -- Shift+Y should copy the entire line.
+vim.keymap.set({"v"}, "<C-S-C>", "\"+y") -- Ctrl+Shift+C to copy to the system clipboard.
 
 -- Reorder tabs with Ctrl+Shift+PageUp and Ctrl+Shift+PageDown.
 -- FIXME: This does nothing??
