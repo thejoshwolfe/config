@@ -7,6 +7,8 @@ vim.opt.expandtab = true -- Down with hard tabs!
 vim.opt.tabstop = 4 -- 4 space indent by default.
 vim.opt.shiftwidth = 4 -- You have to say this twice for some reason.
 
+vim.opt.formatoptions = "jql" -- See https://neovim.io/doc/user/change/#fo-table
+
 vim.opt.ignorecase = true -- Search ignores case by default. respect case with \C prefix.
 vim.opt.smartcase = true -- Search switches to case sensitive sometimes.
 vim.opt.hlsearch = false -- Do not highlight search results.

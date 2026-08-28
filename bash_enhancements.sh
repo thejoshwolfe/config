@@ -365,4 +365,5 @@ nix-maintenance() {
 }
 
 alias pacman="sudo pacman"
+alias pacmansy="sudo pacman -Sy"
 alias systemctl="sudo systemctl"
