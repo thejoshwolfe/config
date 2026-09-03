@@ -13,6 +13,8 @@ vim.opt.ignorecase = true -- Search ignores case by default. respect case with \
 vim.opt.smartcase = true -- Search switches to case sensitive sometimes.
 vim.opt.hlsearch = false -- Do not highlight search results.
 
+vim.opt.mousescroll = "ver:1" -- Slow down vertical scrolling.
+
 -- Key remapping. https://neovim.io/doc/user/lua/#vim.keymap
 -- Ctrl+Space should probably autocomplete instead of whaveter the hell it does normally.
 vim.keymap.set({"n", "v", "c"}, "<Nul>",     "") -- Disable Ctrl+Space in most modes.
