@@ -68,7 +68,7 @@ if which-q gvim; then
     alias vim="gvim -p"
 elif which-q nvim; then
     function vim() {
-        background ghostty --command="$(shlex_join nvim -p "$@")"
+        background ghostty --keybind=ctrl+shift+page_up=unbind --keybind=ctrl+shift+page_down=unbind --command="$(shlex_join nvim -p "$@")"
     }
     export EDITOR=nvim
 else
